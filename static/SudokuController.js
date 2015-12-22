@@ -6,16 +6,36 @@
 
 var mat = new Sudoku();
 
-function test(x, y, m) {
-	var n = mat[x][y]
-	var val = (n == m)
-	// console.log(x, y, mat[x][y], n)
+var info = {
+		start:0,
+		stop:0,
+		delta:0
+}
 
-	var c = document.getElementById("" + x + "-" + y)
-	if (val)
-		c.style.color = "red"
 
-	return val
+function post(path, params, method) {
+    method = method || "post"; // Set method to post by default if not
+								// specified.
+
+    // The rest of this code assumes you are not using a library.
+    // It can be made less wordy if you use one.
+    var form = document.createElement("form");
+    form.setAttribute("method", method);
+    form.setAttribute("action", path);
+
+    for(var key in params) {
+        if(params.hasOwnProperty(key)) {
+            var hiddenField = document.createElement("input");
+            hiddenField.setAttribute("type", "hidden");
+            hiddenField.setAttribute("name", key);
+            hiddenField.setAttribute("value", params[key]);
+
+            form.appendChild(hiddenField);
+         }
+    }
+
+    document.body.appendChild(form);
+    form.submit();
 }
 
 function add(x, y, n) {
@@ -33,8 +53,19 @@ function add(x, y, n) {
 	}
 	
 	if(mat.gameFinished())
-		document.getElementById("menu").innerHTML = "FINISHED !"
+		completeGame()
 
+}
+
+function completeGame(){
+	
+	if(mat.gameFinished())
+		document.getElementById("menu").innerHTML = "FINISHED !";
+	else
+		document.getElementById("menu").innerHTML = "NIIUUUUUUUUUU !";
+	info.stop= new Date().getTime();
+	info.delta = (info.stop - info.start) / 1000
+	post("/",info)
 }
 
 function isNumberKey(evt) {
@@ -53,6 +84,8 @@ function isNumberKey(evt) {
 
 function start() {
 
+	info.start = new Date().getTime()
+	
 	mat.newGame()
 
 	var d = document.getElementById("game")
@@ -95,7 +128,4 @@ function start() {
 		}
 		d.innerHTML += "</br>"
 	}
-}
-
-function check() {
 }

@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Sudoku</title>
+<title>{{titlu}}</title>
 <script src="static/Sudoku.js" type="text/javascript"></script>
 <script src="static/SudokuController.js" type="text/javascript"></script>
 </head>
@@ -10,7 +10,9 @@
 
 	<div id="game" align="center">1</div>
 	<br>
-	<div id="menu" align="center">2</div>
+	<div id="menu" align="center">
+		<input type="submit" action="/" method="post" onclick="completeGame()">
+	</div>
 
 
 </body>
