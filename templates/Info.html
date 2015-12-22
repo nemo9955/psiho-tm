@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>{{titlu}}</title>
+</head>
+<body>
+
+	<form action="/" name="info" method="post">
+		<h3>
+			Numarul de clase absolvite :
+			<input name="clase" type="number" size="3" min="8" max="16" required>
+		</h3>
+		<h3>Cat de des jucati Sudoku ?</h3>
+		<ul style="list-style-type: none">
+			<li><input type="radio" name="exp" value="0" required> foarte rar</li>
+			<li><input type="radio" name="exp" value="1" required> ocazional</li>
+			<li><input type="radio" name="exp" value="2" required> in timpul liber</li>
+			<li><input type="radio" name="exp" value="3" required> cu fiecare ocazie</li>
+		</ul>
+
+		<input type="submit">
+
+	</form>
+</body>
+</html>
