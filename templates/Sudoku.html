@@ -5,14 +5,32 @@
 <title>{{titlu}}</title>
 <script src="static/Sudoku.js" type="text/javascript"></script>
 <script src="static/SudokuController.js" type="text/javascript"></script>
+<link rel="stylesheet" href="static/all.css">
+<style type="text/css">
+input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button
+	{
+	-webkit-appearance: none;
+	margin: 0;
+}
+</style>
+
 </head>
 <body onload="start()">
 
-	<div id="game" align="center">1</div>
 	<br>
-	<div id="menu" align="center">
-		<input type="submit" action="/" method="post" onclick="completeGame()">
+	<br>
+	<br>
+
+	<div align="center">
+		<fieldset style="width: 400px;">
+			<legend>Va rugam sa rezolvati cat mai repede</legend>
+			<div id="game" style="padding: 20px"></div>
+		</fieldset>
 	</div>
+	<br>
+	<!-- 	<div id="menu" align="center"> -->
+	<!-- 		<input  type="submit" action="/" value="" method="post" onclick="completeGame()"> -->
+	<!-- 	</div> -->
 
 
 </body>

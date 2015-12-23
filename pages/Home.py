@@ -14,20 +14,17 @@ from Utils import getJTemplate
 from Utils.firebaseWraper import Firebase
 
 motivBun = [
-       "Ai avut un timp incredibil",
-       "Felicitari, viteza de executie este peste medie",
-       "Ar trebui sa predai sudoku",
-       "WOOOOOOOW",
-       "You are a GOD !",
-       "Bravo !",
+        "Te-ai descurcat excelent.",
+        "Ai facut o treaba foarte buna.",
+        "Esti un exemplu pentru toti.",
+        "Iti merge bine mintea.",
        ]
 motivRau = [
-            "Meh",
-            "Se putea mult mai bine",
-            "esti naspa",
-            "Incearca sahul",
+            "NOPE !!!!!!!",
 ]
-varfeed = ["none", "good", "bad"]
+
+
+varfeed = ["none", "good"]
 
 life = 2 * 6 * 60 * 60
 
@@ -41,7 +38,8 @@ class Home( webapp2.RequestHandler ):
         if "uid" not in  self.request.cookies or "stat" not in  self.request.cookies :
             self.response.set_cookie( "uid" , str( uuid.uuid4() ) , max_age=life )
             self.response.set_cookie( "stat" , "info" )
-            self.redirect( "/" )
+#             print "NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO"#, self.request.cookies , "\n\n"
+            stat = "info"
         else:
             stat = self.request.cookies[ "stat" ]
             uid = self.request.cookies[ "uid" ]
@@ -63,8 +61,6 @@ class Home( webapp2.RequestHandler ):
                 pgmp["feedback"] = random.choice( motivRau )
             tem = getJTemplate( "Feedback.html" )
             self.response.write( tem.render( pgmp ) )
-
-
 
 
     def post( self ):
@@ -109,7 +105,15 @@ class Home( webapp2.RequestHandler ):
 
         self.redirect( "/" )
 
+class NewPlayer( webapp2.RequestHandler ):
+    def get( self ):
+        self.response.set_cookie( "uid" , str( uuid.uuid4() ) , max_age=life )
+        self.response.set_cookie( "stat" , "info" )
+        tem = getJTemplate( "Info.html" )
+        self.response.write( tem.render( pgmp ) )
 
 app = webapp2.WSGIApplication( [
     ( '/', Home ),
+    ( '/new', NewPlayer ),
+    ( '/nou', NewPlayer ),
 ], debug=True )

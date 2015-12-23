@@ -7,35 +7,34 @@
 var mat = new Sudoku();
 
 var info = {
-		start:0,
-		stop:0,
-		delta:0
+	start : 0,
+	stop : 0,
+	delta : 0
 }
 
-
 function post(path, params, method) {
-    method = method || "post"; // Set method to post by default if not
-								// specified.
+	method = method || "post"; // Set method to post by default if not
+	// specified.
 
-    // The rest of this code assumes you are not using a library.
-    // It can be made less wordy if you use one.
-    var form = document.createElement("form");
-    form.setAttribute("method", method);
-    form.setAttribute("action", path);
+	// The rest of this code assumes you are not using a library.
+	// It can be made less wordy if you use one.
+	var form = document.createElement("form");
+	form.setAttribute("method", method);
+	form.setAttribute("action", path);
 
-    for(var key in params) {
-        if(params.hasOwnProperty(key)) {
-            var hiddenField = document.createElement("input");
-            hiddenField.setAttribute("type", "hidden");
-            hiddenField.setAttribute("name", key);
-            hiddenField.setAttribute("value", params[key]);
+	for ( var key in params) {
+		if (params.hasOwnProperty(key)) {
+			var hiddenField = document.createElement("input");
+			hiddenField.setAttribute("type", "hidden");
+			hiddenField.setAttribute("name", key);
+			hiddenField.setAttribute("value", params[key]);
 
-            form.appendChild(hiddenField);
-         }
-    }
+			form.appendChild(hiddenField);
+		}
+	}
 
-    document.body.appendChild(form);
-    form.submit();
+	document.body.appendChild(form);
+	form.submit();
 }
 
 function add(x, y, n) {
@@ -43,29 +42,31 @@ function add(x, y, n) {
 	c.value = n
 	mat.setVal(x, y, n)
 
-	for (var j = 0; j < 9; j++) {
-		for (var i = 0; i < 9; i++) {
-			var a = document.getElementById("" + i + "-" + j)
-			if(a.readOnly === true)
-				continue
-			a.style.color = (mat.checkVal(i, j, mat.getVal(i, j)) ? "black" : "red")
-		}
-	}
-	
-	if(mat.gameFinished())
-		completeGame()
+	// for (var j = 0; j < 9; j++) {
+	// for (var i = 0; i < 9; i++) {
+	// var a = document.getElementById("" + i + "-" + j)
+	// if(a.readOnly === true)
+	// continue
+	// a.style.color = (mat.checkVal(i, j, mat.getVal(i, j)) ? "black" : "red")
+	// }
+	// }
 
+	info.stop = new Date().getTime();
+	info.delta = (info.stop - info.start) / 1000
+
+	if (mat.gameFinished())
+		completeGame()
 }
 
-function completeGame(){
-	
-	if(mat.gameFinished())
-		document.getElementById("menu").innerHTML = "FINISHED !";
-	else
-		document.getElementById("menu").innerHTML = "NIIUUUUUUUUUU !";
-	info.stop= new Date().getTime();
-	info.delta = (info.stop - info.start) / 1000
-	post("/",info)
+function completeGame() {
+
+	if (mat.gameFinished()) {
+		post("/", info)
+	} else {
+
+	}
+	// document.getElementById("menu").innerHTML = "FINISHED !";
+	// document.getElementById("menu").innerHTML = "NIIUUUUUUUUUU !";
 }
 
 function isNumberKey(evt) {
@@ -79,13 +80,13 @@ function isNumberKey(evt) {
 
 	add(x, y, (evt.which - 48))
 
-	return true;
+	return false;
 }
 
 function start() {
 
 	info.start = new Date().getTime()
-	
+
 	mat.newGame()
 
 	var d = document.getElementById("game")
@@ -99,11 +100,15 @@ function start() {
 			a.setAttribute("onkeypress", "return isNumberKey(event)")
 			a.setAttribute("maxlength", "1")
 			a.setAttribute("size", "1")
+			a.setAttribute("type", "number")
+			a.setAttribute("min", "1")
+			a.setAttribute("max", "9")
+			// a.setAttribute("class","no-spinner")
 
 			if (mat.getVal(j, i) !== 0) {
 				a.setAttribute("readonly", "true")
 				a.setAttribute("value", "" + mat.getVal(j, i))
-				a.style.color="blue"
+				a.style.color = "blue"
 			}
 			a.style["text-align"] = "center"
 			a.style["font-size"] = "20px"

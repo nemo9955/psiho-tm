@@ -2,25 +2,37 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="static/all.css">
 <title>{{titlu}}</title>
 </head>
+<br>
+<br>
+<br>
 <body>
+	<div align="center">
+		<fieldset style="width: 500px;">
+			<legend>Informatii jucator</legend>
 
-	<form action="/" name="info" method="post">
-		<h3>
-			Numarul de clase absolvite :
-			<input name="clase" type="number" size="3" min="8" max="16" required>
-		</h3>
-		<h3>Cat de des jucati Sudoku ?</h3>
-		<ul style="list-style-type: none">
-			<li><input type="radio" name="exp" value="0" required> foarte rar</li>
-			<li><input type="radio" name="exp" value="1" required> ocazional</li>
-			<li><input type="radio" name="exp" value="2" required> in timpul liber</li>
-			<li><input type="radio" name="exp" value="3" required> cu fiecare ocazie</li>
-		</ul>
+			<form action="/" name="info" method="post">
+				<h4>
+					Numarul de clase absolvite :
+					<input name="clase" type="number" size="3" min="8" max="16" required>
+				</h4>
 
-		<input type="submit">
 
-	</form>
+				<h4 style="margin-bottom: 10px">Cat de des jucati Sudoku ?</h4>
+				<input type="radio" name="exp" value="0" required>
+				foarte rar <br>
+				<input type="radio" name="exp" value="1" required>
+				ocazional <br>
+				<input type="radio" name="exp" value="2" required>
+				in timpul liber <br>
+				<input type="radio" name="exp" value="3" required>
+				cu fiecare ocazie <br> <br> <br> <br>
+				<input type="submit" value="Trimite">
+
+			</form>
+		</fieldset>
+	</div>
 </body>
 </html>
