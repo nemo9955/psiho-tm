@@ -57,8 +57,6 @@ class Home( webapp2.RequestHandler ):
         if stat == "feedback" :
             if fb.get( str( uid ) + "/feed" ) == '"good"' :
                 pgmp["feedback"] = random.choice( motivBun )
-            else:
-                pgmp["feedback"] = random.choice( motivRau )
             tem = getJTemplate( "Feedback.html" )
             self.response.write( tem.render( pgmp ) )
 
@@ -94,7 +92,7 @@ class Home( webapp2.RequestHandler ):
 
             fb.set( ( uid + "/" + str( i ) + "/" ), sudok )
 
-            if fb.get( str( uid ) + "/feed" ) == "none" :
+            if fb.get( str( uid ) + "/feed" ) == '"none"' :
                 self.response.set_cookie( "stat" , "sudoku" )
             else:
                 self.response.set_cookie( "stat" , "feedback" )

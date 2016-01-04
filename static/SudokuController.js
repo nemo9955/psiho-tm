@@ -50,21 +50,18 @@ function add(x, y, n) {
 	// a.style.color = (mat.checkVal(i, j, mat.getVal(i, j)) ? "black" : "red")
 	// }
 	// }
-
 	info.stop = new Date().getTime();
 	info.delta = (info.stop - info.start) / 1000
 
-	if (mat.gameFinished())
-		completeGame()
+	completeGame()
 }
 
 function completeGame() {
 
 	if (mat.gameFinished()) {
 		post("/", info)
-	} else {
-
 	}
+
 	// document.getElementById("menu").innerHTML = "FINISHED !";
 	// document.getElementById("menu").innerHTML = "NIIUUUUUUUUUU !";
 }
